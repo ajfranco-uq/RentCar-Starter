@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.rentcar.controller.ReservationController" spacing="12">
+    <Label text="Create a reservation" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 16; -fx-background-radius: 8;">
+        <GridPane hgap="12" vgap="10">
+            <Label text="Customer" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <ComboBox fx:id="customerCombo" promptText="Select customer" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+            <Label text="Vehicle" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+            <ComboBox fx:id="vehicleCombo" promptText="Select vehicle" maxWidth="Infinity" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+            <Label text="Start date" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <DatePicker fx:id="startDatePicker" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            <Label text="End date" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+            <DatePicker fx:id="endDatePicker" maxWidth="Infinity" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+            <Label text="Rental mode" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <ComboBox fx:id="modeCombo" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            <Label text="Service package" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <ComboBox fx:id="packageCombo" promptText="No package" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            <Label text="Individual extras" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+            <VBox spacing="5" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                <CheckBox fx:id="gpsCheck" text="GPS"/>
+                <CheckBox fx:id="childSeatCheck" text="Child seat"/>
+                <CheckBox fx:id="extraDriverCheck" text="Additional driver"/>
+            </VBox>
+        </GridPane>
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <Label text="Customer indicators:" style="-fx-font-weight: bold;"/>
+            <Label text="[OK] Authorized" style="-fx-background-color: #DCFCE7; -fx-text-fill: #166534; -fx-padding: 4 7 4 7; -fx-background-radius: 4;"/>
+            <Label text="[BLACKLISTED]" style="-fx-background-color: #FEE2E2; -fx-text-fill: #991B1B; -fx-padding: 4 7 4 7; -fx-background-radius: 4;"/>
+            <Label text="[PAYMENT API ERROR]" style="-fx-background-color: #FEF3C7; -fx-text-fill: #92400E; -fx-padding: 4 7 4 7; -fx-background-radius: 4;"/>
+            <Label text="[PAYMENT DECLINED]" style="-fx-background-color: #FFEDD5; -fx-text-fill: #9A3412; -fx-padding: 4 7 4 7; -fx-background-radius: 4;"/>
+        </HBox>
+        <Label text="Customer verification is performed when you submit the reservation. The payment API is a simulator, not a real payment service." wrapText="true" style="-fx-text-fill: #64748b;"/>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Button fx:id="reserveButton" text="Reserve and pay" onAction="#createReservation" style="-fx-background-color: #2457a7; -fx-text-fill: white;"/>
+            <Button text="Clear" onAction="#clearForm"/>
+            <Label fx:id="totalEstimateLabel" text="Total: —" style="-fx-font-weight: bold;"/>
+        </HBox>
+        <Label fx:id="statusLabel" wrapText="true" style="-fx-text-fill: #334155;"/>
+    </VBox>
+    <Label text="Reservation history" style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+    <TableView fx:id="reservationTable" VBox.vgrow="ALWAYS" prefHeight="240">
+        <columns>
+            <TableColumn fx:id="reservationIdColumn" text="Reservation" prefWidth="100"/>
+            <TableColumn fx:id="reservationCustomerColumn" text="Customer" prefWidth="100"/>
+            <TableColumn fx:id="reservationVehicleColumn" text="Vehicle" prefWidth="100"/>
+            <TableColumn fx:id="reservationStartColumn" text="Start" prefWidth="100"/>
+            <TableColumn fx:id="reservationEndColumn" text="End" prefWidth="100"/>
+            <TableColumn fx:id="reservationTotalColumn" text="Total (COP)" prefWidth="100"/>
+            <TableColumn fx:id="reservationStatusColumn" text="Status" prefWidth="130"/>
+        </columns>
+    </TableView>
+</VBox>
